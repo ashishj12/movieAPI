@@ -80,7 +80,17 @@ async function postMovie(req, res) {
       genre,
       rating,
       duration,
-      poster: req.file,
+      poster: req.file
+        ? {
+            fieldname: req.file.fieldname,
+            originalname: req.file.originalname,
+            mimetype: req.file.mimetype,
+            destination: req.file.destination,
+            filename: req.file.filename,
+            path: req.file.path,
+            size: req.file.size,
+          }
+        : undefined,
     });
     const result = await movie.save();
     res.status(201).json("Movie created");

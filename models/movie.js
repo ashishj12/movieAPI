@@ -11,8 +11,13 @@ const movieSchema = new mongoose.Schema({
   rating: Number,
   duration: Number,
   poster: {
-    data: Buffer,
-    contentType: String,
+    fieldname: String,
+    originalname: String,
+    mimetype: String,
+    destination: String,
+    filename: String,
+    path: String,
+    size: Number
   },
 });
 
