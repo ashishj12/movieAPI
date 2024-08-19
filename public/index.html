@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MovieDatabase</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Movie Database</h1>
+
+      <!-- Display Movies -->
+      <div id="movie-list">
+        <h2>Movies</h2>
+        <button id="get-movies">Get Movies</button>
+        <ul id="movies"></ul>
+      </div>
+
+      <!-- Add Movie Form -->
+      <div id="add-movie">
+        <h2>Add a New Movie</h2>
+        <form id="movie-form" action="/api/movies" method="post" >
+          <input type="text" id="title" placeholder="Title" />
+          <input type="number" id="year" placeholder="Year" />
+          <input type="text" id="genre" placeholder="Genre" />
+          <input type="number" id="rating" placeholder="Rating" />
+          <input type="number" id="duration" placeholder="Duration" />
+          <input type="file" id="poster" />
+          <button type="submit">Add Movie</button>
+        </form>
+        <div id="poster-preview" style="margin-top: 10px">
+          <img id="poster-img" src="" alt="Poster Preview" style="max-width: 100%; display: none"
+          />
+        </div>
+      </div>
+      <p id="error-message" class="error"></p>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

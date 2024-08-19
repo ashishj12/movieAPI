@@ -1,0 +1,112 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+body {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+.container {
+  width: 80%;
+  max-width: 800px;
+  margin: 20px;
+  padding: 20px;
+  background: #1e1e1e;
+  border-radius: 8px;
+}
+
+h1 {
+  text-align: center;
+  color: #ffffff;
+}
+
+#movie-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+#movie-list li {
+  border: 1px solid #333;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background: #282828;
+}
+
+#movie-list button {
+  display: block;
+  margin: 10px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#movie-list button:hover {
+  background-color: #0056b3;
+}
+
+#add-movie {
+  margin-top: 20px;
+}
+
+#add-movie input {
+  display: block;
+  margin: 10px auto;
+  padding: 8px;
+  font-size: 16px;
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid #333;
+  border-radius: 5px;
+  background: #333;
+  color: #e0e0e0;
+}
+
+#add-movie button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#add-movie button:hover {
+  background-color: #0056b3;
+}
+
+.error {
+  color: red;
+  text-align: center;
+}
+
+#poster-preview img {
+  max-width: 200px;
+  max-height: 300px;
+  object-fit: contain;
+}
+
+#movie-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#movie-list li img {
+  width: 50px;
+  height: 75px;
+  object-fit: cover;
+}
