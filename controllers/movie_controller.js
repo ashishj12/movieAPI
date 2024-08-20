@@ -41,11 +41,12 @@ async function getMovie(req, res) {
     const movies = await Movie.find().skip(skip).limit(limit);
     const total = await Movie.countDocuments();
 
+//create an object to store poster url with filename
     const moviesWithPosterUrl = [];
     for (const movie of movies) {
       moviesWithPosterUrl.push({
         ...movie.toObject(),
-        posterUrl: movie.poster ? `/uploads/${movie.poster.filename}` : null
+        posterUrl: movie.poster ? `/uploads/${movie.poster.filename}` : null,
       });
     }
     res.json({
@@ -122,6 +123,7 @@ async function putMovieById(req, res) {
   }
 }
 
+//delete movie by id
 async function deleteMovieById(req, res) {
   try {
     const id = req.params.id;
