@@ -110,3 +110,49 @@ h1, h2 {
   margin: 10px auto;
   display: block;
 }
+
+#get-movies, .pagination button {
+  display: block;
+  margin: 10px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#get-movies:hover, .pagination button:hover {
+  background-color: #0056b3;
+}
+
+.pagination {
+  display: none; /* Hide the pagination controls initially */
+  justify-content: center;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 95%;
+    padding: 10px;
+  }
+
+  #movie-list li {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #movie-list li img {
+    width: 100px;
+    height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  #movie-list li img {
+    width: 75px;
+    height: 112.5px;
+  }
+}
