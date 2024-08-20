@@ -2,6 +2,7 @@ const { Movie } = require("../models/movie");
 const { body, validationResult } = require("express-validator");
 const multer = require("multer");
 
+//create  multer storage for upload movie poster
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "./uploads");
@@ -46,7 +47,7 @@ async function getMovie(req, res) {
     for (const movie of movies) {
       moviesWithPosterUrl.push({
         ...movie.toObject(),
-        posterUrl: movie.poster ? `/uploads/${movie.poster.filename}` : null,
+        posterUrl: movie.poster ? `/${movie.poster.path}` : null,
       });
     }
     res.json({
