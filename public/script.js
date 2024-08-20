@@ -5,11 +5,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const movieForm = document.getElementById("movie-form");
   const posterInput = document.getElementById("poster");
   const posterImg = document.getElementById("poster-img");
+  const prevButton = document.getElementById("prev-page");
+  const nextButton = document.getElementById("next-page");
 
-  //fetch movies list
-  async function fetchMovies() {
+  //intialize current and total page in movies list
+  let currentPage = 1;
+  let totalPages = 1;
+
+  //fetch movies list with passing page and limit
+  async function fetchMovies(page = 1, limit = 5) {
     try {
-      const response = await fetch("http://localhost:3000/api/movies");
+      const response = await fetch(
+        `http://localhost:3000/api/movies?page=${page}&limit=${limit}`
+      );
 
       if (!response.ok) {
         throw new Error("Failed to fetch movies");
@@ -23,11 +31,10 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         data.movies.forEach((movie) => {
           const li = document.createElement("li");
-
           const movieText = document.createElement("span");
           movieText.textContent = `${movie.title} (${movie.year}) - ${movie.genre} - Rating: ${movie.rating} - Duration: ${movie.duration}`;
-          
-//append poster object (poster url)
+
+          //append poster object (poster url)
           const posterImg = document.createElement("img");
           posterImg.src = movie.posterUrl ? movie.posterUrl : "";
           posterImg.alt = movie.title;
@@ -38,12 +45,34 @@ document.addEventListener("DOMContentLoaded", () => {
           movieList.appendChild(li);
         });
       }
+      function updatePaginationControls(page, totalPageCount) {
+        currentPage = page;
+        totalPages = totalPageCount;
+
+        prevButton.disabled = currentPage === 1;
+        nextButton.disabled = currentPage === totalPages;
+
+        prevButton.addEventListener("click", () =>
+          fetchMovies(currentPage - 1)
+        );
+        nextButton.addEventListener("click", () =>
+          fetchMovies(currentPage + 1)
+        );
+
+        if (totalPageCount > 1) {
+          document.querySelector(".pagination").style.display = "flex";
+        } else {
+          document.querySelector(".pagination").style.display = "none";
+        }
+      }
+      //update total pages
+      updatePaginationControls(page, data.totalPages);
     } catch (error) {
       errorMessage.textContent = `Error: ${error.message}`;
     }
   }
 
-  getMoviesButton.addEventListener("click", fetchMovies);
+  getMoviesButton.addEventListener("click", () => fetchMovies(currentPage));
 
   //handle add movies
   async function handleFormSubmit(event) {
@@ -78,13 +107,14 @@ document.addEventListener("DOMContentLoaded", () => {
       movieForm.reset();
       posterImg.src = "";
       posterImg.style.display = "none";
-      fetchMovies();
+      fetchMovies(currentPage);
     } catch (error) {
       errorMessage.textContent = `Error: ${error.message}`;
     }
   }
 
   movieForm.addEventListener("submit", handleFormSubmit);
+
   posterInput.addEventListener("change", () => {
     const file = posterInput.files[0];
     if (file) {
