@@ -41,8 +41,15 @@ async function getMovie(req, res) {
     const movies = await Movie.find().skip(skip).limit(limit);
     const total = await Movie.countDocuments();
 
+    const moviesWithPosterUrl = [];
+    for (const movie of movies) {
+      moviesWithPosterUrl.push({
+        ...movie.toObject(),
+        posterUrl: movie.poster ? `/uploads/${movie.poster.filename}` : null
+      });
+    }
     res.json({
-      movies,
+      movies: moviesWithPosterUrl,
       currentPage: page,
       totalPages: Math.ceil(total / limit),
       totalMovies: total,

@@ -10,27 +10,37 @@ document.addEventListener("DOMContentLoaded", () => {
   async function fetchMovies() {
     try {
       const response = await fetch("http://localhost:3000/api/movies");
-
+  
       if (!response.ok) {
         throw new Error("Failed to fetch movies");
       }
-
+  
       const data = await response.json();
       movieList.innerHTML = "";
-
+  
       if (data.movies.length === 0) {
-        movieList.innerHTML = "<li>No movies found</li>"; //check movie list condition
+        movieList.innerHTML = "<li>No movies found</li>";
       } else {
         data.movies.forEach((movie) => {
-          const li = document.createElement("li"); //get all movies list and append in list
-          li.textContent = `${movie.title} (${movie.year}) - ${movie.genre} - Rating: ${movie.rating} - Duration: ${movie.duration}`;
+          const li = document.createElement("li");
+  
+          const movieText = document.createElement("span");
+          movieText.textContent = `${movie.title} (${movie.year}) - ${movie.genre} - Rating: ${movie.rating} - Duration: ${movie.duration}`;
+          
+          const posterImg = document.createElement("img");
+          posterImg.src = movie.posterUrl ? movie.posterUrl : '';
+          posterImg.alt = movie.title;
+          posterImg.classList.add("poster-img"); 
+  
+          li.appendChild(movieText);
+          li.appendChild(posterImg);
           movieList.appendChild(li);
         });
       }
     } catch (error) {
       errorMessage.textContent = `Error: ${error.message}`;
     }
-  }
+  }  
 
   getMoviesButton.addEventListener("click", fetchMovies);
 
