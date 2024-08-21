@@ -39,12 +39,13 @@ document.addEventListener("DOMContentLoaded", () => {
           posterImg.src = movie.posterUrl ? movie.posterUrl : "";
           posterImg.alt = movie.title;
           posterImg.classList.add("poster-img");
-
+          //append movietext and poster image
           li.appendChild(movieText);
           li.appendChild(posterImg);
           movieList.appendChild(li);
         });
       }
+      //control pagination
       function updatePaginationControls(page, totalPageCount) {
         currentPage = page;
         totalPages = totalPageCount;
@@ -70,8 +71,10 @@ document.addEventListener("DOMContentLoaded", () => {
       errorMessage.textContent = `Error: ${error.message}`;
     }
   }
-
-  getMoviesButton.addEventListener("click", () => fetchMovies(currentPage));
+  //redirect getmovies list
+  getMoviesButton.addEventListener("click", () => {
+    window.location.href = "movies.html";
+  });
 
   //handle add movies
   async function handleFormSubmit(event) {
