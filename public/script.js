@@ -58,7 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
         nextButton.addEventListener("click", () =>
           fetchMovies(currentPage + 1)
         );
-
         if (totalPageCount > 1) {
           document.querySelector(".pagination").style.display = "flex";
         } else {
